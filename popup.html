@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Блокировка экстремистских сайтов</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      width: 320px;
+      padding: 20px;
+      background: #f9f9f9;
+      color: #222;
+      user-select: none;
+    }
+
+    h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-weight: 600;
+      font-size: 1.3em;
+      text-align: center;
+      color: #333;
+    }
+
+    .status {
+      margin-bottom: 20px;
+      font-weight: 600;
+      text-align: center;
+      font-size: 1.1em;
+    }
+
+    /* Тумблер */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 28px;
+      vertical-align: middle;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: 0.3s;
+      border-radius: 14px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.3s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #4caf50;
+    }
+    input:checked + .slider:before {
+      transform: translateX(22px);
+    }
+
+    /* Кнопки */
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      font-size: 1em;
+      font-weight: 600;
+      border: none;
+      border-radius: 5px;
+      background-color: #1976d2;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    button:hover {
+      background-color: #1565c0;
+    }
+	.blocked-item {
+		padding: 4px 0;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.error {
+		color: #f44336;
+		font-style: italic;
+	}
+	
+    /* Блок со списком */
+    #blockedList {
+      margin-top: 15px;
+      max-height: 150px;
+      overflow-y: auto;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 8px;
+      font-size: 0.9em;
+      display: none;
+      white-space: nowrap;
+      word-break: break-word;
+    }
+
+    /* Последнее обновление */
+    #updated {
+      margin-top: 12px;
+      font-size: 0.85em;
+      color: #555;
+      text-align: center;
+      font-style: italic;
+    }
+
+  </style>
+</head>
+<body>
+  <h3>Блокировка экстремистских сайтов</h3>
+
+  <div class="status" id="status">Загрузка...</div>
+
+  <label class="switch" title="Включить/Выключить расширение">
+    <input type="checkbox" id="toggle" />
+    <span class="slider"></span>
+  </label>
+
+  <button id="refresh">Обновить список вручную</button>
+  <button id="showList">Показать список сайтов</button>
+
+  <div id="blockedList"></div>
+
+  <p id="updated">Последнее обновление: —</p>
+
+  <script src="popup.js"></script>
+  <button id="showLogs" style="margin-top: 10px;">Показать логи</button>
+<div id="logContainer" style="display: none; max-height: 200px; overflow-y: auto; 
+     margin-top: 10px; padding: 5px; border: 1px solid #ddd; font-family: monospace;"></div>
+</body>
+</html>
